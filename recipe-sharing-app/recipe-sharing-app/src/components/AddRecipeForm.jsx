@@ -8,9 +8,13 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addRecipe({ id: Date.now(), title, description });
+    const generateUniqueId = () => `${Date.now()}-${Math.random()}`;
+    addRecipe({ id: generateUniqueId(), title, description });
     setTitle('');
     setDescription('');
+    setTimeout(() => {
+       alert(`New Recipe Added sucessfullly`)
+    }, 100)
   };
 
   return (
