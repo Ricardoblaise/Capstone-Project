@@ -3,18 +3,22 @@ import { useRecipeStore } from './recipeStore';
 import { useNavigate } from "react-router-dom";
 
 const EditRecipeForm = ({ recipe }) => {
+  const navigate = useNavigate();
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore(state => state.updateRecipe);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     updateRecipe({ ...recipe, title, description });
+    navigate('/')
+    setTimeout(() => {
+      alert(`Recipe Edited and Updated sucessfullly`)
+    }, 100)
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Edit Recipe</h2>
       <input
         type="text"
         value={title}
@@ -30,3 +34,5 @@ const EditRecipeForm = ({ recipe }) => {
     </form>
   );
 };
+
+export default EditRecipeForm;
